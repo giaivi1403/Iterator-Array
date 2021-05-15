@@ -11,8 +11,8 @@ Array.prototype.map2 = function (callback) {
     for (let index in this) {
         if (this.hasOwnProperty(index)) {
             callback(this[index], +index, this);
-            this[index] = callback(this[index], +index, this);
-            output.push(this[index]);
+            const result = callback(this[index], +index, this);
+            output.push(result);
         }
     }
     return output;
@@ -29,7 +29,7 @@ Array.prototype.filter2 = function (callback) {
 };
 
 Array.prototype.reduce2 = function (callback, init) {
-    let sum = init;
+    let sum = init || 0;
     for (let index in this) {
         if (this.hasOwnProperty(index)) {
             sum = callback(sum, this[index], this);
